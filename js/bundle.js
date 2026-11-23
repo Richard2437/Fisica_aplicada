@@ -62,6 +62,49 @@ const ProblemParser = {
   ],
 
   /**
+   * Limpia y normaliza texto proveniente de fuentes LaTeX o procesadores matemáticos
+   * Convierte expresiones como $37^\circ$, $1000\text{ N}$, $3.0\text{ m}$ a texto legible normal
+   */
+  cleanLaTeX(text) {
+    if (!text || typeof text !== 'string') return '';
+    return text
+      // Grados: $37^\circ$, 37^\circ, 37^{\circ}, 37^o
+      .replace(/(\d+(?:[.,]\d+)?)\s*(?:\^\\circ|\^\{\\circ\}|\^o)/g, '$1°')
+      .replace(/\^\\circ\b/g, '°')
+      .replace(/\^\{\\circ\}/g, '°')
+      .replace(/\^o\b/g, '°')
+      // \text{ m}, \mathrm{kg}, etc., asegurando espacio con el número
+      .replace(/(\d+(?:[.,]\d+)?)\s*\\(?:text|mathrm|textbf|textit)\s*\{\s*([^{}]+?)\s*\}/g, '$1 $2')
+      .replace(/\\(?:text|mathrm|textbf|textit)\s*\{\s*([^{}]+?)\s*\}/g, '$1')
+      // Letras griegas
+      .replace(/\\theta/g, 'θ')
+      .replace(/\\mu/g, 'μ')
+      .replace(/\\alpha/g, 'α')
+      .replace(/\\beta/g, 'β')
+      .replace(/\\gamma/g, 'γ')
+      .replace(/\\Sigma/g, 'Σ')
+      // Operadores matemáticos
+      .replace(/\\times/g, '×')
+      .replace(/\\cdot/g, '·')
+      .replace(/\\approx/g, '≈')
+      .replace(/\\leq?/g, '≤')
+      .replace(/\\geq?/g, '≥')
+      .replace(/\\pm/g, '±')
+      // Fracciones \frac{a}{b} -> a/b
+      .replace(/\\frac\s*\{\s*([^{}]+?)\s*\}\s*\{\s*([^{}]+?)\s*\}/g, '$1/$2')
+      // Potencias
+      .replace(/\^2\b/g, '²')
+      .replace(/\^3\b/g, '³')
+      // Delimitadores de ecuación $ y $$
+      .replace(/\$+/g, '')
+      // Barras invertidas antes de letras residuales
+      .replace(/\\([a-zA-Z]+)/g, '$1')
+      // Espacios múltiples a un solo espacio
+      .replace(/[ \t]+/g, ' ')
+      .trim();
+  },
+
+  /**
    * Analiza el enunciado de texto libre y extrae los parámetros físicos
    * @param {string} text - Enunciado del problema
    * @returns {Object} Datos extraídos con valores numéricos, unidades originales y conversiones al SI
@@ -71,12 +114,15 @@ const ProblemParser = {
       return this.getDefaults();
     }
 
-    const cleanText = text.trim();
+    // Normalizar primero cualquier código LaTeX pegado
+    const normalizedText = this.cleanLaTeX(text);
+    const cleanText = normalizedText.trim();
     const lower = cleanText.toLowerCase();
 
     // Estructura de resultados
     const data = {
       rawText: cleanText,
+      normalizedText: normalizedText,
       mass: { value: 100, unit: 'kg', raw: null, converted: 100 },
       angle: { value: 0, unit: 'deg', raw: null, converted: 0, isPercentage: false },
       velocity: { value: 10, unit: 'm/s', raw: null, converted: 10, isConstant: true },
@@ -118,6 +164,21 @@ const ProblemParser = {
       }
       data.mass.value = data.mass.converted;
       data.matchesFound.push({ type: 'Masa', text: match[0], value: `${data.mass.value} kg` });
+    } else {
+      // Detección de Peso en Newtons como Masa equivalente (W = m·g => m = W / 9.8)
+      const weightRegex = /(?:peso(?:\s+de)?|caja(?:\s+de)?|carga(?:\s+de)?)\s*(\d+(?:[.,]\d+)?)\s*(?:N|newtons?)\b/i;
+      const wMatch = lower.match(weightRegex);
+      if (wMatch) {
+        const wVal = parseFloat(wMatch[1].replace(',', '.'));
+        const equivMass = +(wVal / 9.8).toFixed(2);
+        data.mass.raw = `${wMatch[0]} (W = ${wVal} N)`;
+        data.mass.originalValue = wVal;
+        data.mass.originalUnit = 'N';
+        data.mass.converted = equivMass;
+        data.mass.value = equivMass;
+        data.mass.unit = 'kg';
+        data.matchesFound.push({ type: 'Masa (derivada de Peso W)', text: wMatch[0], value: `${equivMass} kg (de ${wVal} N)` });
+      }
     }
 
     // 2. Detección de Ángulo o Inclinación (Prioridad a grados explícitos, luego %, luego horizontal)
@@ -1495,6 +1556,31 @@ class AppController {
       });
     }
 
+    // Botón para normalizar y limpiar sintaxis LaTeX ($ y \text{})
+    const cleanBtn = document.getElementById('btn-clean-latex');
+    if (cleanBtn && problemInput) {
+      cleanBtn.addEventListener('click', () => {
+        const cleaned = ProblemParser.cleanLaTeX(problemInput.value);
+        problemInput.value = cleaned;
+      });
+    }
+
+    // Auto-limpieza inteligente al pegar texto copiado con formato LaTeX
+    if (problemInput) {
+      problemInput.addEventListener('paste', (e) => {
+        const pasteData = (e.clipboardData || window.clipboardData)?.getData('text');
+        if (pasteData && (pasteData.includes('$') || pasteData.includes('\\text') || pasteData.includes('\\circ') || pasteData.includes('\\mathrm'))) {
+          e.preventDefault();
+          const cleanedPaste = ProblemParser.cleanLaTeX(pasteData);
+          const start = problemInput.selectionStart;
+          const end = problemInput.selectionEnd;
+          const currentVal = problemInput.value;
+          problemInput.value = currentVal.substring(0, start) + cleanedPaste + currentVal.substring(end);
+          problemInput.selectionStart = problemInput.selectionEnd = start + cleanedPaste.length;
+        }
+      });
+    }
+
     if (presetSelect) {
       presetSelect.addEventListener('change', (e) => {
         if (e.target.value) {
@@ -1640,9 +1726,15 @@ class AppController {
   }
 
   parseAndSolve(text) {
-    // 1. Extraer datos con NLP / RegEx
+    // 1. Extraer datos con NLP / RegEx (con limpieza automática de LaTeX)
     const parsed = ProblemParser.parse(text);
     this.currentParsedData = parsed;
+
+    // Actualizar el campo de texto con la tipografía normal limpia si contenía LaTeX
+    const inputArea = document.getElementById('problem-input');
+    if (inputArea && parsed.normalizedText && inputArea.value !== parsed.normalizedText) {
+      inputArea.value = parsed.normalizedText;
+    }
 
     // 2. Sincronizar estado editable
     this.state.mass = parsed.mass.value;

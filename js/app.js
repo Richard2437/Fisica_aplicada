@@ -74,6 +74,31 @@ class AppController {
       });
     }
 
+    // Botón para normalizar y limpiar sintaxis LaTeX ($ y \text{})
+    const cleanBtn = document.getElementById('btn-clean-latex');
+    if (cleanBtn && problemInput) {
+      cleanBtn.addEventListener('click', () => {
+        const cleaned = ProblemParser.cleanLaTeX(problemInput.value);
+        problemInput.value = cleaned;
+      });
+    }
+
+    // Auto-limpieza inteligente al pegar texto copiado con formato LaTeX
+    if (problemInput) {
+      problemInput.addEventListener('paste', (e) => {
+        const pasteData = (e.clipboardData || window.clipboardData)?.getData('text');
+        if (pasteData && (pasteData.includes('$') || pasteData.includes('\\text') || pasteData.includes('\\circ') || pasteData.includes('\\mathrm'))) {
+          e.preventDefault();
+          const cleanedPaste = ProblemParser.cleanLaTeX(pasteData);
+          const start = problemInput.selectionStart;
+          const end = problemInput.selectionEnd;
+          const currentVal = problemInput.value;
+          problemInput.value = currentVal.substring(0, start) + cleanedPaste + currentVal.substring(end);
+          problemInput.selectionStart = problemInput.selectionEnd = start + cleanedPaste.length;
+        }
+      });
+    }
+
     if (presetSelect) {
       presetSelect.addEventListener('change', (e) => {
         if (e.target.value) {
@@ -219,9 +244,15 @@ class AppController {
   }
 
   parseAndSolve(text) {
-    // 1. Extraer datos con NLP / RegEx
+    // 1. Extraer datos con NLP / RegEx (con limpieza automática de LaTeX)
     const parsed = ProblemParser.parse(text);
     this.currentParsedData = parsed;
+
+    // Actualizar el campo de texto con la tipografía normal limpia si contenía LaTeX
+    const inputArea = document.getElementById('problem-input');
+    if (inputArea && parsed.normalizedText && inputArea.value !== parsed.normalizedText) {
+      inputArea.value = parsed.normalizedText;
+    }
 
     // 2. Sincronizar estado editable
     this.state.mass = parsed.mass.value;
