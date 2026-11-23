@@ -1,6 +1,9 @@
 # Dependencias
 node_modules/
 
+# Vercel
+.vercel/
+
 # Logs y temporales
 *.log
 .DS_Store
@@ -9,3 +12,5 @@ Thumbs.db
 # Directorios de entorno local
 .vscode/
 .idea/
+
+.vercel
