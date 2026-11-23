@@ -1,7 +1,6 @@
 /**
  * Controlador Principal de la Aplicación
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -45,7 +44,7 @@ class AppController {
     // 3. Vincular eventos de la interfaz
     this.bindEvents();
 
-    // 4. Cargar problema inicial predeterminado (Camión en rampa de la propuesta Lasallista)
+    // 4. Cargar problema inicial predeterminado (Camión en rampa)
     this.loadPreset('camion-pendiente-potencia');
   }
 

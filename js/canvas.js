@@ -1,7 +1,6 @@
 /**
  * Motor de Renderizado Vectorial 2D (HTML5 Canvas)
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 

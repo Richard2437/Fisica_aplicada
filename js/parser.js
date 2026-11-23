@@ -1,7 +1,6 @@
 /**
  * Módulo de Extracción de Datos y Procesamiento de Lenguaje Natural (NLP / RegEx)
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -14,7 +13,7 @@ export const ProblemParser = {
       id: 'camion-pendiente-potencia',
       title: 'Camión en pendiente con resistencia (Cálculo de Potencia en HP)',
       category: 'Equilibrio Dinámico & Potencia',
-      description: 'Problema rector de la propuesta de aula Lasallista.',
+      description: 'Problema clásico de dinámica y potencia mecánica.',
       text: 'Un camión de 1200 kg asciende por una pendiente inclinada 15° con una velocidad constante de 72 km/h. Si la fuerza de resistencia al movimiento (fricción y arrastre del aire) es de 450 N, determine la fuerza de tracción necesaria que debe ejercer el motor y la potencia mecánica desarrollada expresada en Watts, kilovatios (kW) y caballos de potencia (HP).'
     },
     {

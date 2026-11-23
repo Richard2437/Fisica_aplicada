@@ -1,7 +1,6 @@
 /**
  * Motor de Dinámica y Física Newtoniana (DynamicsEngine)
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -48,7 +47,7 @@ export const DynamicsEngine = {
     }
 
     // 5. Ecuación de Movimiento en el Eje X' (paralelo al plano)
-    // Convención Lasallista:
+    // Convención de Signos y Equilibrio:
     // Para movimiento ascendente (up):
     // ΣFx = m * a
     // Ft - fr - Wx = m * a   =>   Ft = fr + Wx + m * a

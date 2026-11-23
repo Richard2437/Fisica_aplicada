@@ -23,7 +23,7 @@ const appSrc = fs.readFileSync('js/app.js', 'utf8')
 
 const bundleContent = `/**
  * Bundle Universal Autocontenido - Dinámica Newtoniana y DCL
- * Corporación Universitaria Lasallista - Estudiante: Ricardo Jaraba Gallego
+ * Estudiante: Ricardo Jaraba Gallego
  */
 (function() {
   'use strict';

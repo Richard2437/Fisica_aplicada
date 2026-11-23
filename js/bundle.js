@@ -1,6 +1,6 @@
 /**
  * Bundle Universal Autocontenido - Dinámica Newtoniana y DCL
- * Corporación Universitaria Lasallista - Estudiante: Ricardo Jaraba Gallego
+ * Estudiante: Ricardo Jaraba Gallego
  */
 (function() {
   'use strict';
@@ -8,7 +8,6 @@
   /**
  * Módulo de Extracción de Datos y Procesamiento de Lenguaje Natural (NLP / RegEx)
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -21,7 +20,7 @@ const ProblemParser = {
       id: 'camion-pendiente-potencia',
       title: 'Camión en pendiente con resistencia (Cálculo de Potencia en HP)',
       category: 'Equilibrio Dinámico & Potencia',
-      description: 'Problema rector de la propuesta de aula Lasallista.',
+      description: 'Problema clásico de dinámica y potencia mecánica.',
       text: 'Un camión de 1200 kg asciende por una pendiente inclinada 15° con una velocidad constante de 72 km/h. Si la fuerza de resistencia al movimiento (fricción y arrastre del aire) es de 450 N, determine la fuerza de tracción necesaria que debe ejercer el motor y la potencia mecánica desarrollada expresada en Watts, kilovatios (kW) y caballos de potencia (HP).'
     },
     {
@@ -330,7 +329,6 @@ const ProblemParser = {
   /**
  * Motor de Dinámica y Física Newtoniana (DynamicsEngine)
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -377,7 +375,7 @@ const DynamicsEngine = {
     }
 
     // 5. Ecuación de Movimiento en el Eje X' (paralelo al plano)
-    // Convención Lasallista:
+    // Convención de Signos y Equilibrio:
     // Para movimiento ascendente (up):
     // ΣFx = m * a
     // Ft - fr - Wx = m * a   =>   Ft = fr + Wx + m * a
@@ -495,7 +493,6 @@ const DynamicsEngine = {
   /**
  * Motor de Renderizado Vectorial 2D (HTML5 Canvas)
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -1169,7 +1166,6 @@ class DCLCanvas {
   /**
  * Generador de Memoria de Cálculo y Análisis Paso a Paso
  * Metodología Académica de Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -1205,17 +1201,17 @@ const StepRenderer = {
       <!-- Memoria de Cálculo Académica -->
       <article class="academic-report">
         
-        <!-- Membrete Institucional Oficial -->
+        <!-- Membrete Académico -->
         <header class="report-header">
           <div class="header-badges">
             <span class="badge badge-primary">Física Mecánica</span>
             <span class="badge badge-secondary">Dinámica Traslacional</span>
-            <span class="badge badge-accent">Metodología Lasallista</span>
+            <span class="badge badge-accent">Resolución Paso a Paso</span>
           </div>
           <h2 class="report-title">Memoria de Cálculo y Análisis Simbólico-Numérico</h2>
           <div class="report-metadata">
-            <div><strong>Institución:</strong> Corporación Universitaria Lasallista</div>
-            <div><strong>Facultad:</strong> Ingeniería Informática</div>
+            <div><strong>Asignatura:</strong> Física Mecánica</div>
+            <div><strong>Proyecto:</strong> Dinámica y Diagrama de Cuerpo Libre (DCL)</div>
             <div><strong>Estudiante:</strong> Ricardo Jaraba Gallego</div>
             <div><strong>Docente:</strong> Jeisson Javier Ortiz Arroyave</div>
           </div>
@@ -1475,7 +1471,7 @@ const StepRenderer = {
         </section>
 
         <footer class="report-footer">
-          <p>Documento generado computacionalmente para la cátedra de Física Mecánica - Corporación Universitaria Lasallista.</p>
+          <p>Documento generado computacionalmente para la cátedra de Física Mecánica.</p>
         </footer>
 
       </article>
@@ -1487,7 +1483,6 @@ const StepRenderer = {
   /**
  * Controlador Principal de la Aplicación
  * Proyecto de Aula - Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -1527,7 +1522,7 @@ class AppController {
     // 3. Vincular eventos de la interfaz
     this.bindEvents();
 
-    // 4. Cargar problema inicial predeterminado (Camión en rampa de la propuesta Lasallista)
+    // 4. Cargar problema inicial predeterminado (Camión en rampa)
     this.loadPreset('camion-pendiente-potencia');
   }
 

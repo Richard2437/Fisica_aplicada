@@ -1,7 +1,6 @@
 /**
  * Generador de Memoria de Cálculo y Análisis Paso a Paso
  * Metodología Académica de Física Mecánica
- * Corporación Universitaria Lasallista
  * Autor: Ricardo Jaraba Gallego
  */
 
@@ -37,17 +36,17 @@ export const StepRenderer = {
       <!-- Memoria de Cálculo Académica -->
       <article class="academic-report">
         
-        <!-- Membrete Institucional Oficial -->
+        <!-- Membrete Académico -->
         <header class="report-header">
           <div class="header-badges">
             <span class="badge badge-primary">Física Mecánica</span>
             <span class="badge badge-secondary">Dinámica Traslacional</span>
-            <span class="badge badge-accent">Metodología Lasallista</span>
+            <span class="badge badge-accent">Resolución Paso a Paso</span>
           </div>
           <h2 class="report-title">Memoria de Cálculo y Análisis Simbólico-Numérico</h2>
           <div class="report-metadata">
-            <div><strong>Institución:</strong> Corporación Universitaria Lasallista</div>
-            <div><strong>Facultad:</strong> Ingeniería Informática</div>
+            <div><strong>Asignatura:</strong> Física Mecánica</div>
+            <div><strong>Proyecto:</strong> Dinámica y Diagrama de Cuerpo Libre (DCL)</div>
             <div><strong>Estudiante:</strong> Ricardo Jaraba Gallego</div>
             <div><strong>Docente:</strong> Jeisson Javier Ortiz Arroyave</div>
           </div>
@@ -307,7 +306,7 @@ export const StepRenderer = {
         </section>
 
         <footer class="report-footer">
-          <p>Documento generado computacionalmente para la cátedra de Física Mecánica - Corporación Universitaria Lasallista.</p>
+          <p>Documento generado computacionalmente para la cátedra de Física Mecánica.</p>
         </footer>
 
       </article>

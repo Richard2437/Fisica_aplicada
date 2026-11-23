@@ -65,7 +65,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`================================================================`);
-  console.log(`  Física Mecánica - Corporación Universitaria Lasallista`);
+  console.log(`  Física Mecánica - Dinámica Newtoniana y DCL`);
   console.log(`  Servidor activo en: http://localhost:${PORT}`);
   console.log(`  Abra la URL en su navegador web para interactuar.`);
   console.log(`================================================================`);

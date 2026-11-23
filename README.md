@@ -1,7 +1,5 @@
 # Herramienta Computacional para la Resolución Simbólica y Gráfica de Dinámica Newtoniana y DCL
 
-**Corporación Universitaria Lasallista**  
-**Facultad de Ingenierías — Ingeniería Informática**  
 **Asignatura:** Física Mecánica  
 **Estudiante:** Ricardo Jaraba Gallego  
 **Docente:** Jeisson Javier Ortiz Arroyave  
@@ -41,7 +39,7 @@ Esta herramienta computacional interactiva automatiza el modelado físico, el di
    - Simulación y animación suave de movimiento a lo largo del plano.
    - Toggles interactivos para activar/desactivar componentes, valores numéricos y ejes.
 
-3. **Memoria de Cálculo Paso a Paso (Metodología Lasallista):**
+3. **Memoria de Cálculo Paso a Paso (Metodología de Clase):**
    - **Paso 1:** Extracción y tabla formal de conversión dimensional al SI.
    - **Paso 2:** Definición analítica del Sistema de Referencia rotado y convención de signos.
    - **Paso 3:** Demostración geométrica y cálculo de componentes del peso ($W_x = mg\sin\theta$, $W_y = mg\cos\theta$).
@@ -168,7 +166,7 @@ node test/verify_all.mjs
 ## 7. Banco de Ejercicios Preconfigurados
 
 El sistema incluye 6 problemas tipo examen listos para cargar con un clic desde el selector de la interfaz:
-1. **Camión en pendiente con resistencia (Cálculo de Potencia en HP):** Problema rector de la propuesta de aula Lasallista ($m = 1200\text{ kg}$, $\theta = 15^\circ$, $v = 72\text{ km/h}$, $f_r = 450\text{ N}$).
+1. **Camión en pendiente con resistencia (Cálculo de Potencia en HP):** Problema clásico de dinámica y potencia ($m = 1200\text{ kg}$, $\theta = 15^\circ$, $v = 72\text{ km/h}$, $f_r = 450\text{ N}$).
 2. **Bloque acelerado hacia arriba con fricción dinámica:** Análisis bajo aceleración neta positiva ($a = 1.8\text{ m/s}^2$).
 3. **Caja descendiendo por una rampa a velocidad constante:** Análisis del régimen de descenso y retención.
 4. **Objeto arrastrado en superficie horizontal con fricción:** Caso límite canónico con ángulo nulo ($\theta = 0^\circ$).
@@ -177,4 +175,4 @@ El sistema incluye 6 problemas tipo examen listos para cargar con un clic desde 
 
 ---
 
-**Corporación Universitaria Lasallista — 2026**
+**Física Mecánica — 2026**
