@@ -1,0 +1,678 @@
+/**
+ * Estilos Principales - Herramienta de Dinámica Newtoniana y DCL
+ * Corporación Universitaria Lasallista
+ * Autor: Ricardo Jaraba Gallego
+ */
+
+:root {
+  --primary: #0284c7;
+  --primary-dark: #0369a1;
+  --primary-light: #e0f2fe;
+  --secondary: #475569;
+  --accent: #f59e0b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAVBAR SUPERIOR INSTITUCIONAL */
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-logo-badge {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-md);
+  letter-spacing: 0.5px;
+}
+
+.brand-titles h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.brand-titles p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* CONTENEDOR PRINCIPAL DOS COLUMNAS */
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column-left, .column-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* TARJETAS COMUNES */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* PANEL 1: ENUNCIADO Y NLP */
+.preset-selector-wrapper {
+  margin-bottom: 0.75rem;
+}
+
+.preset-selector-wrapper label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.select-styled {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  background-color: #f8fafc;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.select-styled:focus {
+  border-color: var(--primary);
+  background-color: #ffffff;
+}
+
+.input-area-wrapper {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.problem-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 0.75rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  background-color: #ffffff;
+  resize: vertical;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.problem-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.entity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #bae6fd;
+}
+
+.entity-type {
+  opacity: 0.85;
+}
+
+.entity-val {
+  font-family: var(--font-mono);
+}
+
+.badge-empty {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* BOTONES */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-outline {
+  background: #ffffff;
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.btn-outline.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+/* PANEL 2: CANVAS DCL */
+.canvas-wrapper {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 420px;
+}
+
+#dcl-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.85rem;
+}
+
+.control-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--secondary);
+  font-weight: 500;
+}
+
+.control-toggle input[type="checkbox"] {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* PANEL 3: AJUSTE DE PARÁMETROS EN VIVO */
+.parameters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.param-group {
+  background: #f8fafc;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+}
+
+.param-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.param-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.param-num-input {
+  width: 70px;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.param-slider {
+  width: 100%;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* COLUMNA DERECHA: MEMORIA DE CÁLCULO ACADÉMICA */
+.academic-report {
+  background: #ffffff;
+  padding: 0.5rem;
+}
+
+.report-header {
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.header-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  letter-spacing: 0.4px;
+}
+
+.badge-primary { background: #e0f2fe; color: #0369a1; }
+.badge-secondary { background: #f1f5f9; color: #475569; }
+.badge-accent { background: #fef3c7; color: #b45309; }
+
+.report-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.report-metadata {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: #f8fafc;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+}
+
+/* KPI CARDS (RESUMEN DE MAGNITUDES CLAVE) */
+.results-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+  padding: 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 0.2rem;
+}
+
+.kpi-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  line-height: 1.2;
+}
+
+.kpi-value small {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.kpi-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.kpi-normal { background: #ecfdf5; border-color: #a7f3d0; color: #065f46; }
+.kpi-normal .kpi-label { color: #047857; }
+
+.kpi-friction { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+.kpi-friction .kpi-label { color: #b91c1c; }
+
+.kpi-traction { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+.kpi-traction .kpi-label { color: #b45309; }
+
+.kpi-power { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+.kpi-power .kpi-label { color: #15803d; }
+
+/* PASOS DE LA SOLUCIÓN */
+.solution-step {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 3px solid #e2e8f0;
+}
+
+.solution-step:hover {
+  border-left-color: var(--primary);
+}
+
+.step-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.3rem;
+}
+
+.step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.4rem;
+}
+
+.step-description {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 0.75rem;
+}
+
+.step-list {
+  padding-left: 1.25rem;
+  font-size: 0.88rem;
+  color: #334155;
+  margin-bottom: 0.75rem;
+}
+
+.step-list li {
+  margin-bottom: 0.3rem;
+}
+
+.step-note {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-top: 0.4rem;
+}
+
+/* CAJAS MATEMÁTICAS */
+.math-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  margin: 0.6rem 0;
+}
+
+.math-row {
+  margin-bottom: 0.75rem;
+}
+
+.math-row:last-child {
+  margin-bottom: 0;
+}
+
+.math-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 0.25rem;
+}
+
+.math-eq {
+  padding: 0.35rem 0;
+  overflow-x: auto;
+}
+
+.highlighted-eq {
+  background: #fef9c3;
+  border: 1px dashed #ca8a04;
+  border-radius: 6px;
+  padding: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+/* TABLA DE DATOS */
+.table-responsive {
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.data-table th, .data-table td {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.data-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #334155;
+}
+
+.data-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* CALLOUTS */
+.callout {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  margin: 0.75rem 0;
+}
+
+.callout-info {
+  background: #f0f9ff;
+  border-left: 4px solid #0284c7;
+  color: #0c4a6e;
+}
+
+.callout-info ul {
+  padding-left: 1.25rem;
+}
+
+.callout-success {
+  background: #f0fdf4;
+  border-left: 4px solid #16a34a;
+  color: #14532d;
+}
+
+.callout-success ul {
+  padding-left: 1.25rem;
+}
+
+.report-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* ESTILOS DE IMPRESIÓN (PRINT MEDIA) PARA ENTREGA ACADÉMICA */
+@media print {
+  body {
+    background: #ffffff;
+    font-size: 11pt;
+  }
+
+  .navbar, .column-left, .navbar-actions, #btn-print {
+    display: none !important;
+  }
+
+  .main-layout {
+    display: block;
+    padding: 0;
+  }
+
+  .card {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .academic-report {
+    padding: 0;
+  }
+
+  .solution-step {
+    page-break-inside: avoid;
+    border-left: 2px solid #333333;
+    padding-left: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .kpi-card {
+    border: 1px solid #cccccc;
+    color: #000000 !important;
+    background: #ffffff !important;
+  }
+
+  .math-box {
+    background: #fdfdfd;
+    border: 1px solid #dddddd;
+  }
+}

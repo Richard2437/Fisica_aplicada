@@ -1,0 +1,25 @@
+{
+  "name": "fisica_mec_aplication",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Herramienta Computacional para la Resolución Simbólica y Gráfica de Problemas de Dinámica Newtoniana y DCL - Corporación Universitaria Lasallista",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test/verify.mjs"
+  },
+  "keywords": [
+    "fisica",
+    "mecanica",
+    "dcl",
+    "newton",
+    "diagrama-cuerpo-libre",
+    "lasallista"
+  ],
+  "author": "Ricardo Jaraba Gallego",
+  "license": "MIT",
+  "dependencies": {
+    "katex": "^0.16.8"
+  }
+}

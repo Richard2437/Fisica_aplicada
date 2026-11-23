@@ -1,0 +1,11 @@
+# Dependencias
+node_modules/
+
+# Logs y temporales
+*.log
+.DS_Store
+Thumbs.db
+
+# Directorios de entorno local
+.vscode/
+.idea/
